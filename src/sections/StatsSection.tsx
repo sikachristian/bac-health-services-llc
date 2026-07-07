@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const stats = [
@@ -12,7 +11,7 @@ const stats = [
 function AnimatedCounter({ target, suffix, isVisible }: { target: number; suffix: string; isVisible: boolean }) {
   const [count, setCount] = useState(0);
   const countRef = useRef(0);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!isVisible) return;

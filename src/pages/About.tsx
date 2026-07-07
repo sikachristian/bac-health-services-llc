@@ -2,8 +2,7 @@ import Navigation from "@/sections/Navigation";
 import PageHeader from "@/sections/PageHeader";
 import Footer from "@/sections/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Check, ArrowRight, Users, Award, HeartPulse, GraduationCap } from "lucide-react";
-import { Link } from "react-router";
+import { Check, Users, Award, HeartPulse, GraduationCap } from "lucide-react";
 
 const highlights = [
   "Leading Therapy Specialists",
@@ -23,11 +22,6 @@ const leadershipTeam = [
     role: "Chief Executive",
     description: "As Chief Executive, Alex Mitchell leads with a vision for innovation excellence with over a decade of experience in driving business growth.",
   },
-];
-
-const stats = [
-  { value: "65K", label: "Winning Award" },
-  { value: "70+", label: "Client Reviews" },
 ];
 
 function AboutContent() {
@@ -174,7 +168,7 @@ function LeadershipSection() {
   const { ref, isVisible } = useScrollReveal(0.2);
 
   return (
-    <section ref={ref}Name="py-20 lg:py-28">
+    <section ref={ref} className="py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className={`text-center mb-14 transition-all duration-700 ${
