@@ -56,8 +56,14 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
         xs: "calc(var(--radius) - 6px)",
       },
+      fontFamily: {
+        heading: ["DM Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        body: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        card: "0 4px 24px -4px rgb(0 0 0 / 0.08)",
+        elevated: "0 12px 48px -8px rgb(0 0 0 / 0.12)",
       },
       keyframes: {
         "accordion-down": {
