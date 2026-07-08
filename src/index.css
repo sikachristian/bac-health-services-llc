@@ -82,3 +82,15 @@
     font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   }
 }
+
+/* Hide Kimi Agent badge */
+@layer base {
+  [class*="kimi-badge"],
+  [class*="Kimi"],
+  [id*="kimi"],
+  a[href*="kimi.com"],
+  .fixed.bottom-4.right-4,
+  .fixed.bottom-2.right-2 {
+    display: none !important;
+  }
+}

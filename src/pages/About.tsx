@@ -40,8 +40,8 @@ function AboutContent() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-elevated">
                 <img
-                  src="/assets/provider-portrait.jpg"
-                  alt="Healthcare professional at BAC Health Services"
+                  src="/assets/tafie-hugs.png"
+                  alt="Compassionate care at BAC Health Services"
                   className="w-full h-[480px] object-cover object-top"
                 />
               </div>
@@ -212,10 +212,12 @@ export default function About() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      <PageHeader overline="About Us" title="About BAC Health Services" />
-      <AboutContent />
-      <StaffingSection />
-      <LeadershipSection />
+      <main>
+        <PageHeader title="About BAC Health Services" />
+        <AboutContent />
+        <StaffingSection />
+        <LeadershipSection />
+      </main>
       <Footer />
     </div>
   );

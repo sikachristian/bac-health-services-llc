@@ -91,8 +91,10 @@ export default function Resources() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      <PageHeader overline="Resources" title="Patient Resources" />
-      <ResourcesGrid />
+      <main>
+        <PageHeader title="Patient Resources" />
+        <ResourcesGrid />
+      </main>
       <Footer />
     </div>
   );

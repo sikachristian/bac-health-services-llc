@@ -84,7 +84,7 @@ export default function ServicesPreview() {
   const { ref, isVisible } = useScrollReveal(0.15);
 
   return (
-    <section ref={ref} className="h-screen w-full flex items-center bg-white">
+    <section id="services" ref={ref} aria-label="Our services" className="w-full py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Header */}
         <div
@@ -103,26 +103,27 @@ export default function ServicesPreview() {
         {/* Services Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((service, i) => (
-            <Link
+            <article
               key={service.title}
-              to={service.href}
               className={`group bg-[#FEFEFB] rounded-2xl p-6 border border-[#E8EDE8] hover:border-[#5B7B6F]/30 hover:shadow-card transition-all duration-300 hover:-translate-y-1 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${200 + i * 100}ms`, transitionDuration: "700ms" }}
             >
-              <div className="mb-4">{service.icon}</div>
-              <h3 className="text-[17px] font-semibold text-[#1C2D3A] font-heading mb-2 group-hover:text-[#5B7B6F] transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-[13px] leading-[1.65] text-[#6B7B6B] mb-4 font-body line-clamp-2">
-                {service.description}
-              </p>
-              <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#5B7B6F] group-hover:gap-2 transition-all">
-                Read More
-                <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
+              <Link to={service.href} className="block">
+                <div className="mb-4" aria-hidden="true">{service.icon}</div>
+                <h3 className="text-[17px] font-semibold text-[#1C2D3A] font-heading mb-2 group-hover:text-[#5B7B6F] transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-[13px] leading-[1.65] text-[#6B7B6B] mb-4 font-body line-clamp-2">
+                  {service.description}
+                </p>
+                <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#5B7B6F] group-hover:gap-2 transition-all">
+                  Read More
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </span>
+              </Link>
+            </article>
           ))}
         </div>
       </div>

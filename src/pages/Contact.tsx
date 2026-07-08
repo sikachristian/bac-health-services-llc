@@ -262,8 +262,10 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-[#FEFEFB]">
       <Navigation />
-      <PageHeader overline="Contact Us" title="Get In Touch" />
-      <ContactForm />
+      <main>
+        <PageHeader title="Get In Touch" />
+        <ContactForm />
+      </main>
       <Footer />
     </div>
   );

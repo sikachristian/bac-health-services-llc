@@ -179,9 +179,11 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      <PageHeader overline="Our Services" title="Comprehensive Mental Health Care" />
-      <ServicesGrid />
-      <StaffingCTA />
+      <main>
+        <PageHeader title="Comprehensive Mental Health Care" />
+        <ServicesGrid />
+        <StaffingCTA />
+      </main>
       <Footer />
     </div>
   );

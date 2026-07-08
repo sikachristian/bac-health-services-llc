@@ -13,7 +13,7 @@ export default function AboutPreview() {
   const { ref, isVisible } = useScrollReveal(0.2);
 
   return (
-    <section ref={ref} className="h-screen w-full flex items-center bg-[#FEFEFB]">
+    <section id="about" ref={ref} aria-label="About the company" className="w-full py-20 lg:py-24 bg-[#FEFEFB]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left - Content */}
@@ -22,7 +22,7 @@ export default function AboutPreview() {
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
             }`}
           >
-            <p className="text-[12px] font-semibold tracking-[0.12em] text-[#5B7B6F] uppercase mb-3 font-heading">
+            <p className="text-[12px] font-semibold tracking-[0.12em] text-[#5B7B6F] uppercase mb-3 font-heading" role="doc-subtitle">
               About Company
             </p>
             <h2 className="text-[36px] lg:text-[44px] font-bold text-[#1C2D3A] font-heading leading-tight mb-6">
@@ -72,13 +72,14 @@ export default function AboutPreview() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-elevated">
                 <img
-                  src="/assets/hero-bg.jpg"
-                  alt="Calming therapy environment"
-                  className="w-full h-[420px] lg:h-[480px] object-cover"
+                  src="/assets/dr-tafie-patient.png"
+                  alt="Dr. Tafie providing compassionate patient care at BAC Health Services"
+                  className="w-full h-[420px] lg:h-[480px] object-cover object-top"
+                  loading="lazy"
                 />
               </div>
               {/* Floating badge */}
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-card border border-[#E8EDE8] p-5 max-w-[220px]">
+              <div className="absolute bottom-6 left-6 bg-white rounded-2xl shadow-card border border-[#E8EDE8] p-5 max-w-[220px]">
                 <p className="text-[32px] font-bold text-[#5B7B6F] font-heading leading-none mb-1">5+</p>
                 <p className="text-[13px] text-[#4A5D4A] font-medium">Years of Excellence in Mental Health Care</p>
               </div>

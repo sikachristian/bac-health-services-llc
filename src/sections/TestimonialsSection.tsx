@@ -23,7 +23,7 @@ export default function TestimonialsSection() {
   const { ref, isVisible } = useScrollReveal(0.15);
 
   return (
-    <section ref={ref} className="h-screen w-full flex items-center bg-white">
+    <section id="testimonials" ref={ref} aria-label="Client testimonials" className="w-full py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Header */}
         <div
@@ -42,29 +42,29 @@ export default function TestimonialsSection() {
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <div
+            <article
               key={t.name}
               className={`bg-[#FEFEFB] rounded-2xl p-7 border border-[#E8EDE8] hover:shadow-card transition-all duration-500 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${200 + i * 150}ms` }}
             >
-              <Quote className="w-8 h-8 text-[#5B7B6F]/30 mb-4" />
-              <p className="text-[14px] leading-[1.75] text-[#4A5D4A] mb-6 font-body italic">
-                "{t.quote}"
-              </p>
-              <div className="flex items-center gap-3 pt-4 border-t border-[#E8EDE8]">
-                <div className="w-10 h-10 rounded-full bg-[#5B7B6F]/10 flex items-center justify-center">
+              <Quote className="w-8 h-8 text-[#5B7B6F]/30 mb-4" aria-hidden="true" />
+              <blockquote className="text-[14px] leading-[1.75] text-[#4A5D4A] mb-6 font-body italic">
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+              <footer className="flex items-center gap-3 pt-4 border-t border-[#E8EDE8]">
+                <div className="w-10 h-10 rounded-full bg-[#5B7B6F]/10 flex items-center justify-center" aria-hidden="true">
                   <span className="text-[14px] font-semibold text-[#5B7B6F]">
                     {t.name.split(" ").map((n) => n[0]).join("")}
                   </span>
                 </div>
-                <div>
+                <cite className="not-italic">
                   <p className="text-[14px] font-semibold text-[#1C2D3A]">{t.name}</p>
                   <p className="text-[12px] text-[#6B7B6B]">{t.title}</p>
-                </div>
-              </div>
-            </div>
+                </cite>
+              </footer>
+            </article>
           ))}
         </div>
       </div>

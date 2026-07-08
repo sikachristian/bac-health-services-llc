@@ -25,7 +25,7 @@ export default function ApproachesSection() {
   const { ref, isVisible } = useScrollReveal(0.15);
 
   return (
-    <section ref={ref} className="h-screen w-full flex flex-col bg-[#FEFEFB]">
+    <section id="approaches" ref={ref} aria-label="Our therapeutic approaches" className="w-full bg-[#5B7B6F]">
       {/* CTA Banner - top portion */}
       <div
         className={`bg-[#5B7B6F] py-12 transition-all duration-700 ${
@@ -63,34 +63,34 @@ export default function ApproachesSection() {
       </div>
 
       {/* Our Approaches */}
-      <div className="flex-1 flex items-center">
+      <div className="py-20 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div
             className={`text-center mb-10 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            <p className="text-[12px] font-semibold tracking-[0.12em] text-[#5B7B6F] uppercase mb-3 font-heading">
+            <p className="text-[12px] font-semibold tracking-[0.12em] text-white/60 uppercase mb-3 font-heading">
               The Process
             </p>
-            <h2 className="text-[36px] lg:text-[44px] font-bold text-[#1C2D3A] font-heading leading-tight">
+            <h2 className="text-[36px] lg:text-[44px] font-bold text-white font-heading leading-tight">
               Our Approaches
             </h2>
-            <p className="text-[15px] text-[#4A5D4A] mt-4 max-w-2xl mx-auto font-body leading-relaxed">
+            <p className="text-[15px] text-white/70 mt-4 max-w-2xl mx-auto font-body leading-relaxed">
               Every person is different and with medication management we look to make sure that it will effectively create the outcome you are looking for. Here are some of the approaches to certain conditions with medication management.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {approaches.map((approach, i) => (
-              <div
+              <article
                 key={approach.title}
                 className={`bg-white rounded-2xl p-6 border border-[#E8EDE8] hover:shadow-card hover:-translate-y-1 transition-all duration-300 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: `${300 + i * 100}ms`, transitionDuration: "700ms" }}
               >
-                <div className="w-10 h-10 rounded-xl bg-[#5B7B6F]/10 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-xl bg-[#5B7B6F]/10 flex items-center justify-center mb-4" aria-hidden="true">
                   <span className="text-[16px] font-bold text-[#5B7B6F] font-heading">{i + 1}</span>
                 </div>
                 <h3 className="text-[15px] font-semibold text-[#1C2D3A] font-heading mb-2">
@@ -99,7 +99,7 @@ export default function ApproachesSection() {
                 <p className="text-[13px] leading-[1.65] text-[#6B7B6B] font-body">
                   {approach.description}
                 </p>
-              </div>
+              </article>
             ))}
           </div>
         </div>

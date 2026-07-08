@@ -48,42 +48,29 @@ export default function StatsSection() {
   const { ref, isVisible } = useScrollReveal(0.3);
 
   return (
-    <section ref={ref} className="h-screen w-full flex items-center bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        {/* Section header */}
-        <div
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
-        >
-          <p className="text-[12px] font-semibold tracking-[0.12em] text-[#5B7B6F] uppercase mb-3 font-heading">
-            FUN FACT
-          </p>
-          <h2 className="text-[36px] lg:text-[44px] font-bold text-[#1C2D3A] font-heading leading-tight">
-            Learn More About Our Success Stories
-          </h2>
-        </div>
+    <section id="stats" ref={ref} aria-label="Statistics" className="w-full flex flex-col items-center justify-center bg-white mt-16 py-10">
+      {/* Visually hidden heading for screen readers */}
+      <h2 className="sr-only">Our Impact in Numbers</h2>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {stats.map((stat, i) => (
-            <div
-              key={stat.label}
-              className={`text-center transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${i * 150}ms` }}
-            >
-              <div className="text-[52px] lg:text-[64px] font-bold text-[#5B7B6F] font-heading leading-none mb-2">
-                <AnimatedCounter target={stat.value} suffix={stat.suffix} isVisible={isVisible} />
-              </div>
-              <p className="text-[14px] lg:text-[15px] text-[#4A5D4A] font-medium tracking-wide">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Stats Grid — uses description list for semantic number/label pairs */}
+      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8 w-full">
+        {stats.map((stat, i) => (
+          <div
+            key={stat.label}
+            className={`text-center transition-all duration-700 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: `${i * 150}ms` }}
+          >
+            <dt className="text-[52px] lg:text-[64px] font-bold text-[#5B7B6F] font-heading leading-none mb-2">
+              <AnimatedCounter target={stat.value} suffix={stat.suffix} isVisible={isVisible} />
+            </dt>
+            <dd className="text-[14px] lg:text-[15px] text-[#4A5D4A] font-medium tracking-wide">
+              {stat.label}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

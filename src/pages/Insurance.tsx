@@ -130,9 +130,11 @@ export default function InsurancePage() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      <PageHeader overline="Insurance" title="We Accept Your Insurance" />
-      <InsuranceGrid />
-      <SelfPaySection />
+      <main>
+        <PageHeader title="We Accept Your Insurance" />
+        <InsuranceGrid />
+        <SelfPaySection />
+      </main>
       <Footer />
     </div>
   );

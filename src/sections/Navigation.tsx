@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Insurance", href: "/insurance" },
   { label: "Resources", href: "/resources" },
   { label: "Contact", href: "/contact" },
+  { label: "Patient Form", href: "/patient-form" },
 ];
 
 const serviceDropdown = [
@@ -44,6 +45,7 @@ export default function Navigation() {
 
   return (
     <nav
+      aria-label="Main navigation"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled || !isHome
           ? "bg-white/95 backdrop-blur-md shadow-sm"
@@ -72,6 +74,8 @@ export default function Navigation() {
               >
                 <Link
                   to={link.href}
+                  aria-haspopup={link.hasDropdown ? "true" : undefined}
+                  aria-expanded={link.hasDropdown ? dropdownOpen : undefined}
                   className={`flex items-center gap-1 px-4 py-2 rounded-lg text-[14px] font-medium transition-colors
                     ${isActive(link.href)
                       ? "text-[#5B7B6F] bg-[#5B7B6F]/8"
@@ -81,7 +85,7 @@ export default function Navigation() {
                     }`}
                 >
                   {link.label}
-                  {link.hasDropdown && <ChevronDown className="w-3.5 h-3.5" />}
+                  {link.hasDropdown && <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />}
                 </Link>
                 {link.hasDropdown && dropdownOpen && (
                   <div className="absolute top-full left-0 mt-1 w-56 bg-white/95 backdrop-blur-md rounded-xl shadow-elevated border border-[#E8EDE8] py-2 overflow-hidden">
@@ -113,11 +117,13 @@ export default function Navigation() {
               <Phone className="w-4 h-4" />
               <span>(240) 713-8080</span>
             </a>
-            <Button
-              className="bg-[#5B7B6F] hover:bg-[#4A6A5E] text-white rounded-full px-6 h-10 text-[13px] font-semibold tracking-wide shadow-sm hover:shadow-md transition-all"
-            >
-              Book Appointment
-            </Button>
+            <Link to="/patient-form">
+              <Button
+                className="bg-[#5B7B6F] hover:bg-[#4A6A5E] text-white rounded-full px-6 h-10 text-[13px] font-semibold tracking-wide shadow-sm hover:shadow-md transition-all"
+              >
+                Book Appointment
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile toggle */}
@@ -132,11 +138,12 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-[#E8EDE8] px-4 py-4">
+        <div role="menu" aria-label="Mobile navigation" className="lg:hidden bg-white/95 backdrop-blur-md border-t border-[#E8EDE8] px-4 py-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               to={link.href}
+              role="menuitem"
               className="block py-3 text-[15px] font-medium text-[#4A5D4A] hover:text-[#5B7B6F]"
               onClick={() => setMobileOpen(false)}
             >
@@ -151,9 +158,11 @@ export default function Navigation() {
               <Phone className="w-4 h-4" />
               (240) 713-8080
             </a>
-            <Button className="bg-[#5B7B6F] hover:bg-[#4A6A5E] text-white rounded-full h-11 text-[13px] font-semibold w-full">
-              Book Appointment
-            </Button>
+            <Link to="/patient-form" className="block">
+              <Button className="bg-[#5B7B6F] hover:bg-[#4A6A5E] text-white rounded-full h-11 text-[13px] font-semibold w-full">
+                Book Appointment
+              </Button>
+            </Link>
           </div>
         </div>
       )}
