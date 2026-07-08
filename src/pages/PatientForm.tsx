@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navigation from "@/sections/Navigation";
 import Footer from "@/sections/Footer";
-import { trpc } from "@/providers/trpc";
+import { databases, ID, APPWRITE_CONFIG } from "@/lib/appwrite";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,9 +45,7 @@ export default function PatientForm() {
     privacyAccepted: false,
   });
 
-  const submitPatient = trpc.patient.submit.useMutation({
-    onSuccess: () => setSubmitted(true),
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const toggleMedicalHistory = (item: string) => {
     setMedicalHistory((prev) =>
@@ -55,27 +53,41 @@ export default function PatientForm() {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    submitPatient.mutate({
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      dateOfBirth: formData.dateOfBirth,
-      gender: formData.sex,
-      insuranceProvider: formData.insuranceType,
-      reasonForVisit: formData.reasonForVisit,
-      preferredDate: formData.availability,
-      notes: `Medication: ${formData.takesMedication === "yes" ? formData.medicationList : "None"}\nAllergies: ${formData.hasAllergies === "yes" ? formData.allergyList : "None"}\nAddress: ${formData.address}\nMedical History: ${medicalHistory.join(", ")}\nTobacco: ${formData.tobacco} ${formData.tobaccoFrequency}\nDrugs: ${formData.illegalDrugs === "yes" ? formData.drugList : "No"}\nAlcohol: ${formData.alcoholFrequency}\nPhysician: ${formData.hasPhysician}\nPharmacy: ${formData.preferredPharmacy}\nMessage: ${formData.message}`,
-      smsConsent: formData.smsConsent === "yes",
-    });
+    setIsSubmitting(true);
+    try {
+      await databases.createDocument(
+        APPWRITE_CONFIG.database,
+        APPWRITE_CONFIG.collections.PATIENTS,
+        ID.unique(),
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          dateOfBirth: formData.dateOfBirth,
+          gender: formData.sex,
+          insuranceProvider: formData.insuranceType,
+          reasonForVisit: formData.reasonForVisit,
+          preferredDate: formData.availability,
+          status: "new",
+          smsConsent: formData.smsConsent === "yes",
+          notes: `Medication: ${formData.takesMedication === "yes" ? formData.medicationList : "None"}\nAllergies: ${formData.hasAllergies === "yes" ? formData.allergyList : "None"}\nAddress: ${formData.address}\nMedical History: ${medicalHistory.join(", ")}\nTobacco: ${formData.tobacco} ${formData.tobaccoFrequency}\nDrugs: ${formData.illegalDrugs === "yes" ? formData.drugList : "No"}\nAlcohol: ${formData.alcoholFrequency}\nPhysician: ${formData.hasPhysician}\nPharmacy: ${formData.preferredPharmacy}\nMessage: ${formData.message}`,
+          createdAt: new Date().toISOString(),
+        }
+      );
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Submit error:", err);
+      alert("Failed to submit form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const update = (field: string, value: string | boolean) =>
     setFormData((prev) => ({ ...prev, [field]: value }));
-
-  const required = (value: string) => value ? "" : "This field is required";
 
   if (submitted) {
     return (
@@ -337,10 +349,10 @@ export default function PatientForm() {
           <div className="text-center">
             <Button
               type="submit"
-              disabled={submitPatient.isPending}
+              disabled={isSubmitting}
               className="bg-[#5B7B6F] hover:bg-[#4A6A5E] text-white rounded-full px-10 h-12 text-[14px] font-semibold shadow-sm hover:shadow-md transition-all inline-flex items-center gap-2 disabled:opacity-50"
             >
-              {submitPatient.isPending ? (
+              {isSubmitting ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
               ) : (
                 <><Send className="w-4 h-4" /> Submit Patient Form</>

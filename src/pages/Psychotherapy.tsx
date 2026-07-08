@@ -2,7 +2,7 @@ import Navigation from "@/sections/Navigation";
 import PageHeader from "@/sections/PageHeader";
 import Footer from "@/sections/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Check, Heart, Shield, Users, ArrowRight } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 
 const benefits = [
