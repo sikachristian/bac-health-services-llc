@@ -136,30 +136,51 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — Full Screen */}
       {mobileOpen && (
-        <div role="menu" aria-label="Mobile navigation" className="lg:hidden bg-white/95 backdrop-blur-md border-t border-[#E8EDE8] px-4 py-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              role="menuitem"
-              className="block py-3 text-[15px] font-medium text-[#4A5D4A] hover:text-[#5B7B6F]"
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="mt-4 pt-4 border-t border-[#E8EDE8] flex flex-col gap-3">
+        <div
+          role="menu"
+          aria-label="Mobile navigation"
+          className="fixed inset-0 top-[72px] z-40 lg:hidden bg-white flex flex-col"
+        >
+          <div className="flex-1 overflow-y-auto px-6 py-8">
+            {navLinks.map((link) => (
+              <div key={link.href}>
+                <Link
+                  to={link.href}
+                  role="menuitem"
+                  className="block py-4 text-[22px] font-medium text-[#1C2D3A] hover:text-[#5B7B6F] border-b border-[#E8EDE8]"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </Link>
+                {link.hasDropdown && (
+                  <div className="pl-4 pb-2">
+                    {serviceDropdown.map((s) => (
+                      <Link
+                        key={s.href}
+                        to={s.href}
+                        className="block py-2.5 text-[15px] text-[#6B7B6B] hover:text-[#5B7B6F]"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {s.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="shrink-0 px-6 py-6 border-t border-[#E8EDE8] space-y-4">
             <a
               href="tel:+12407138080"
-              className="flex items-center gap-2 text-[14px] font-medium text-[#4A5D4A]"
+              className="flex items-center justify-center gap-2 text-[15px] font-medium text-[#1C2D3A]"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-5 h-5 text-[#5B7B6F]" />
               (240) 713-8080
             </a>
-            <Link to="/patient-form" className="block">
-              <Button className="bg-[#5B7B6F] hover:bg-[#4A6A5E] text-white rounded-full h-11 text-[13px] font-semibold w-full">
+            <Link to="/patient-form" className="block" onClick={() => setMobileOpen(false)}>
+              <Button className="bg-[#5B7B6F] hover:bg-[#4A6A5E] text-white rounded-full h-12 text-[15px] font-semibold w-full">
                 Book Appointment
               </Button>
             </Link>
